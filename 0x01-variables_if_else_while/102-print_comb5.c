@@ -6,34 +6,23 @@
  */
 int main(void)
 {
-	int a;
-	int b;
-	int c;
+	int p, q;
 
-	a = 0;
-	while (a <= 7)
+	for (p = 0; p <= 98; p++)
 	{
-		b = a + 1;
-		while (b <= 8)
+		for (q = p + 1; q <= 99; q++)
 		{
-			c = b + 1;
-			while (c <= 9)
-			{
-				putchar(a + 48);
-				putchar(b + 48);
-				putchar(c + 48);
-				if (a < 7)
-				{
-					putchar(',');
-					putchar(' ');
-				}
-				c++;
-			}
-			b++;
+			putchar((p / 10) + '0');
+			putchar((p % 10) + '0');
+			putchar(' ');
+			putchar((q / 10) + '0');
+			putchar((q % 10) + '0');
+			if (p == 98 && q == 99)
+				continue;
+			putchar(',');
+			putchar(' ');
 		}
-		a++;
 	}
-
 	putchar('\n');
 	return (0);
 }
