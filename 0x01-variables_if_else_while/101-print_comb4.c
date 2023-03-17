@@ -16,6 +16,7 @@ int main(void)
 		{
 			c = b + 1;
 			while (c <= 9)
+			{
 			putchar(a + 48);
 			putchar(b + 48);
 			putchar(c + 48);
