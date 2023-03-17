@@ -18,7 +18,7 @@ int main(void)
 			while (c <= 9)
 			{
 				putchar(a + 48);
-				putchar(b +48);
+				putchar(b + 48);
 				putchar(c + 48);
 				if (a < 7 || b < 8 || c < 9)
 				{
