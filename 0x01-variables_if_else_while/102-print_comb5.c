@@ -6,13 +6,15 @@
  */
 int main(void)
 {
-	int a, b, c;
+	int a;
+	int b;
+	int c;
 
 	a = 0;
 	while (a <= 7)
 	{
 		b = a + 1;
-		while (c <= 8)
+		while (b <= 8)
 		{
 			c = b + 1;
 			while (c <= 9)
