@@ -13,5 +13,6 @@ int main(void)
 			putchar(c)
 				c++;
 		}
+	putcher('\n');
 	return (0);
 }
