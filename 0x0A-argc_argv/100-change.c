@@ -24,22 +24,22 @@ int main(int argc, char *argv[])
 		j++;
 		if ((i - 25) >= 0)
 		{
-			i -= 25;
+			i = i - 25;
 			continue;
 		}
 		if ((i - 10) >= 0)
 		{
-			i -= 10;
+			i = i - 10;
 			continue;
 		}
 		if ((i - 5) >= 0)
 		{
-			i -= 5;
+			i = i - 5;
 			continue;
 		}
 		if ((i - 2) >= 0)
 		{
-			i -= 2;
+			i = i - 2;
 			continue;
 		}
 		i--;
