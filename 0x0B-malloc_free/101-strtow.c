@@ -15,7 +15,7 @@ int count_word(char *s)
 	z = 0;
 	for (y = 0; s[y] != '\0'; y++)
 	{
-		if (s[y] == ' ')
+		if (s[y] == '')
 			x = 0;
 		else if (x == 0)
 		{
@@ -46,7 +46,7 @@ char **strtow(char *str)
 		return (NULL);
 	for (a = 0; a <= l; a++)
 	{
-		if (str[a] == ' ' || str[a] == '\0')
+		if (str[a] == '' || str[a] == '\0')
 		{
 			if (c)
 			{
