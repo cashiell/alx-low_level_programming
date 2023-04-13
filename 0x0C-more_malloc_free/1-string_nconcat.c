@@ -19,22 +19,22 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	l_2++;
 
 	if (n < l_2)
-	s = malloc(sizeof(char) * (l_1 + n + 1));
+	j = malloc(sizeof(char) * (l_1 + n + 1));
 	else
-	s = malloc(sizeof(char) * (l_1 + l_2 + 1));
+	j = malloc(sizeof(char) * (l_1 + l_2 + 1));
 
-	if (!s)
+	if (!j)
 	return (NULL);
 	while (x < l_1)
 	{
-	s[x] = s1[x];
+	j[x] = s1[x];
 	x++;
 	}
 	while (n < l_2 && x < (l_1 + n))
-		s[x++] = s2[y++];
+		j[x++] = s2[y++];
 	while (n >= l_2 && x < (l_1 + l_2))
-		s[x++] = s2[y++];
-	s[x] = '\0';
-	return (s);
+		j[x++] = s2[y++];
+	j[x] = '\0';
+	return (j);
 }
 
