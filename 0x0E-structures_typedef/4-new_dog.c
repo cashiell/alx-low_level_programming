@@ -43,36 +43,36 @@ char *_strcpy(char *dest, char *src)
 }
 /**
  * new_dog - creates a new dog
- * @n: name of the dog
- * @a: dog age
- * @o: dog owner
+ * @name: name of the dog
+ * @age: dog age
+ * @owner: dog owner
  *
  * Return: pointer
  */
-dog_t *new_dog(char *n, float a, char *o)
+dog_t *new_dog(char *name, float age, char *owner)
 {
 	dog_t *d;
 	int l_1, l_2;
 
-	l_1 = _strlen(n);
-	l_2 = _strlen(o);
+	l_1 = _strlen(name);
+	l_2 = _strlen(owner);
 
 	d = malloc(sizeof(char) * (l_1 + 1));
-	if (d -> n == NULL)
+	if (d->name == NULL)
 	{
 		free(d);
 		return (NULL);
 	}
-	d -> o = malloc(sizeof(char) * (l_2 + 1));
-	if (d -> o == NULL)
+	d->owner = malloc(sizeof(char) * (l_2 + 1));
+	if (d->owner == NULL)
 	{
 		free(d);
-		free(d -> n);
+		free(d->name);
 		return (NULL);
 	}
-	_strcpy(d -> n, n);
-	_strcpy(d -> o, o);
-	d -> a = a;
+	_strcpy(d->name, name);
+	_strcpy(d->owner, owner);
+	d->age = age;
 	return (d);
 }
 
