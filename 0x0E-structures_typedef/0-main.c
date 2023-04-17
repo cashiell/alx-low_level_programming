@@ -10,9 +10,9 @@ int main(void)
 {
     struct dog my_dog;
 
-    my_dog.n = "Poppy";
-    my_dog.a = 3.5;
-    my_dog.o = "Bob";
-    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog.n, my_dog.a);
+    my_dog.name = "Poppy";
+    my_dog.age = 3.5;
+    my_dog.owner = "Bob";
+    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog.name, my_dog.age);
     return (0);
 }
