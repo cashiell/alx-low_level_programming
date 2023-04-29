@@ -6,4 +6,4 @@ xor eax, eax
 call prinf
 mov exa, 0
 ret
-format: db 'Hello, Holbertton\n',0
+format: db 'Hello, Holberton\n',0
