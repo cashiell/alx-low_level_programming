@@ -22,7 +22,7 @@ int main(void)
     add_nodeint_end(&head, 98);
     add_nodeint_end(&head, 402);
     add_nodeint_end(&head, 1024);
-    sum = sum_listint(head);
+    sum = pop_listint(head);
     printf("sum = %d\n", sum);
     free_listint2(&head);
     return (0);

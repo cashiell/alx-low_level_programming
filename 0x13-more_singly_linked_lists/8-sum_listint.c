@@ -11,7 +11,7 @@ int sum_listint(listint_t *head)
 
 	while (y)
 	{
-		sum = sum + y->n;
+		sum += y->n;
 		y = y->next;
 	}
 	return (sum);
