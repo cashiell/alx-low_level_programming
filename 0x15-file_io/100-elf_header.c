@@ -6,32 +6,32 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-void typeface_version(unsigned char *recog);
-void typeface_data(unsigned char *recog);
-void typeface_class(unsigned char *recog);
-void scan_elf(unsigned char *recog);
-void typeface_magic(unsigned char *recog);
-void typeface_type(unsigned int x, unsigned char *recog);
-void typeface_entry(unsigned long int y, unsigned char *recog);
-void typeface_abi(unsigned char *recog);
-void typeface_osabi(unsigned char *recog);
+void typeface_version(unsigned char *e_ident);
+void typeface_data(unsigned char *e_ident);
+void typeface_class(unsigned char *e_ident);
+void scan_elf(unsigned char *e_ident);
+void typeface_magic(unsigned char *e_ident);
+void typeface_type(unsigned int x, unsigned char *e_ident);
+void typeface_entry(unsigned long int y, unsigned char *e_ident);
+void typeface_abi(unsigned char *e_ident);
+void typeface_osabi(unsigned char *e_ident);
 void end_elf(int j);
 
 /**
  * scan_elf - scan if its an elf file
- * @recog: pointer to an array
+ * @e_ident: pointer to an array
  * Return: void
  */
-void scan_elf(unsigned char *recog)
+void scan_elf(unsigned char *e_ident)
 {
 	int x;
 
 	for (x = 0; x < 4; x++)
 	{
-		if (recog[x] != 127 &&
-				recog[x] != 'E' &&
-				recog[x] != 'L' &&
-				recog[x] != 'F')
+		if (e_ident[x] != 127 &&
+				e_ident[x] != 'E' &&
+				e_ident[x] != 'L' &&
+				e_ident[x] != 'F')
 		{
 			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
 			exit(98);
@@ -40,17 +40,17 @@ void scan_elf(unsigned char *recog)
 }
 /**
  * typeface_magic - write magic number
- * @recog: pointer to an array
+ * @e_ident: pointer to an array
  * Return: void
  */
-void typeface_magic(unsigned char *recog)
+void typeface_magic(unsigned char *e_ident)
 {
 	int x;
 
 	printf("Magic: ");
 	for (x = 0; x < EI_NIDENT; x++)
 	{
-		printf("%02x", recog[x]);
+		printf("%02x", e_ident[x]);
 		if (x == EI_NIDENT - 1)
 			printf("\n");
 		else
@@ -59,13 +59,13 @@ void typeface_magic(unsigned char *recog)
 }
 /**
  * typeface_class - write class
- * @recog: a pointer to array
+ * @e_ident: a pointer to array
  * Return: void
  */
-void typeface_class(unsigned char *recog)
+void typeface_class(unsigned char *e_ident)
 {
 	printf("Class:   ");
-		switch (recog[EI_CLASS])
+		switch (e_ident[EI_CLASS])
 		{
 			case ELFCLASSNONE:
 				printf("none\n");
@@ -77,18 +77,18 @@ void typeface_class(unsigned char *recog)
 				printf("ELF64\n");
 				break;
 			default:
-				printf("<unknown: %x>\n", recog[EI_CLASS]);
+				printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 		}
 }
 /**
  * typeface_data - write the data
- * @recog: poinetr to array
+ * @e_ident: poinetr to array
  * Return: void
  */
-void typeface_data(unsigned char *recog)
+void typeface_data(unsigned char *e_ident)
 {
 	printf("Data:  ");
-	switch (recog[EI_DATA])
+	switch (e_ident[EI_DATA])
 	{
 		case ELFDATANONE:
 			printf("none\n");
@@ -100,18 +100,18 @@ void typeface_data(unsigned char *recog)
 			printf("2's complement, bit endian\n");
 			break;
 		default:
-			printf("<unknown: %x>\n", recog[EI_CLASS]);
+			printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 	}
 }
 /**
  * typeface_version - write version
- * @recog: a pointer to an array
+ * @e_ident: a pointer to an array
  * Return: void
  */
-void typeface_version(unsigned char *recog)
+void typeface_version(unsigned char *e_ident)
 {
-	printf("Version: %d", recog[EI_VERSION]);
-	switch (recog[EI_VERSION])
+	printf("Version: %d", e_ident[EI_VERSION]);
+	switch (e_ident[EI_VERSION])
 	{
 		case EV_CURRENT:
 			printf(" (current)\n");
@@ -123,13 +123,13 @@ void typeface_version(unsigned char *recog)
 }
 /**
  * typeface_osabi - write OS/ABI
- * @recog: pointer to array
+ * @e_ident: pointer to array
  * Return: void
  */
-void typeface_osabi(unsigned char *recog)
+void typeface_osabi(unsigned char *e_ident)
 {
 	printf(" OS/ABI: ");
-	switch (recog[EI_OSABI])
+	switch (e_ident[EI_OSABI])
 	{
 		case ELFOSABI_NONE:
 			printf("UNIX - System V\n");
@@ -162,27 +162,27 @@ void typeface_osabi(unsigned char *recog)
 			printf("Standalone App\n");
 			break;
 		default:
-			printf("<unknown: %x>\n", recog[EI_OSABI]);
+			printf("<unknown: %x>\n", e_ident[EI_OSABI]);
 	}
 }
 /**
  * typeface_abi - write the ABI
- * @recog: a pointer to array
+ * @e_ident: a pointer to array
  * Return: void
  */
-void typeface_abi(unsigned char *recog)
+void typeface_abi(unsigned char *e_ident)
 {
-	printf(" ABI Version: %d\n", recog[EI_ABIVERSION]);
+	printf(" ABI Version: %d\n", e_ident[EI_ABIVERSION]);
 }
 /**
  * typeface_type - write the type
  * @x: ELF type
- * @recog: a pointer to array
+ * @e_ident: a pointer to array
  * Return: void
  */
-void typeface_type(unsigned int x, unsigned char *recog)
+void typeface_type(unsigned int x, unsigned char *e_ident)
 {
-	if (recog[EI_DATA] == ELFDATA2MSB)
+	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		x >>= 8;
 	printf(" Type: ");
 	switch (x)
@@ -209,18 +209,18 @@ void typeface_type(unsigned int x, unsigned char *recog)
 /**
  * typeface_entry - write the entry
  * @y: the address
- * @recog: a pointer to array
+ * @e_ident: a pointer to array
  * Return: void
  */
-void typeface_entry(unsigned long int y, unsigned char *recog)
+void typeface_entry(unsigned long int y, unsigned char *e_ident)
 {
 	printf("Entry point address: ");
-	if (recog[EI_DATA] == ELFDATA2MSB)
+	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
 		y = ((y << 8) & 0xFF00FF00) | ((y >> 8) & 0xFF00FF);
 		y = (y << 16) | (y >> 16);
 	}
-	if (recog[EI_CLASS] == ELFCLASS32)
+	if (e_ident[EI_CLASS] == ELFCLASS32)
 		printf("%#x\n", (unsigned int)y);
 	else
 		printf("%#lx\n", y);
