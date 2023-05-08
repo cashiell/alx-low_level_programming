@@ -31,7 +31,7 @@ void end_file(int x)
 	i = close(x);
 	if (i == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can'r close x %d\n", x);
+		dprintf(STDERR_FILENO, "Error: Can't close x %d\n", x);
 		exit(100);
 	}
 }
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from filr_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_amid file_via\n");
 		exit(97);
 	}
 	j = generate_j(argv[2]);
