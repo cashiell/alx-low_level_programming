@@ -277,8 +277,8 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	typeface_version(hdr->e_ident);
 	typeface_osabi(hdr->e_ident);
 	typeface_abi(hdr->e_ident);
-	typeface_type(hdr->e_type, hdr->e_ident);
-	typeface_entry(hdr->e_entry, hdr->e_ident);
+	typeface_type(hdr->x, hdr->e_ident);
+	typeface_entry(hdr->y, hdr->e_ident);
 	free(hdr);
 	end_elf(i);
 	return (0);
