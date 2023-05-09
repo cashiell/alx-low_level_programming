@@ -114,7 +114,7 @@ void typeface_version(unsigned char *e_ident)
 	switch (e_ident[EI_VERSION])
 	{
 		case EV_CURRENT:
-			printf(" (current)\n");
+			printf("(current)\n");
 			break;
 		default:
 			printf("\n");
@@ -188,19 +188,19 @@ void typeface_type(unsigned int e_type, unsigned char *e_ident)
 	switch (e_type)
 	{
 		case ET_NONE:
-			printf("NONE (None)\n");
+			printf("NONE(None)\n");
 			break;
 		case ET_REL:
-			printf("REL (Relocatable file)\n");
+			printf("REL(Relocatable file)\n");
 			break;
 		case ET_EXEC:
-			printf("EXEC (Executable file)\n");
+			printf("EXEC(Executable file)\n");
 			break;
 		case ET_DYN:
-			printf("DYN (Shared object file)\n");
+			printf("DYN(Shared object file)\n");
 			break;
 		case ET_CORE:
-			printf("CORE (Core file)\n");
+			printf("CORE(Core file)\n");
 			break;
 		default:
 			printf("<unknown: %x>\n", e_type);
@@ -233,7 +233,7 @@ void end_elf(int j)
 {
 	if (close(j) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can'r close file %d\n", j);
+		dprintf(STDERR_FILENO, "Error: Can't close file %d\n", j);
 		exit(98);
 	}
 }
