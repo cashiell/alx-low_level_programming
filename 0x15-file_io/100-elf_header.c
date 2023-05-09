@@ -11,8 +11,8 @@ void typeface_data(unsigned char *e_ident);
 void typeface_class(unsigned char *e_ident);
 void scan_elf(unsigned char *e_ident);
 void typeface_magic(unsigned char *e_ident);
-void typeface_type(unsigned int x, unsigned char *e_ident);
-void typeface_entry(unsigned long int y, unsigned char *e_ident);
+void typeface_type(unsigned int e_type, unsigned char *e_ident);
+void typeface_entry(unsigned long int e_entry, unsigned char *e_ident);
 void typeface_abi(unsigned char *e_ident);
 void typeface_osabi(unsigned char *e_ident);
 void end_elf(int j);
@@ -176,14 +176,14 @@ void typeface_abi(unsigned char *e_ident)
 }
 /**
  * typeface_type - write the type
- * @x: ELF type
+ * @e_type: ELF type
  * @e_ident: a pointer to array
  * Return: void
  */
-void typeface_type(unsigned int x, unsigned char *e_ident)
+void typeface_type(unsigned int e_type, unsigned char *e_ident)
 {
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
-		x >>= 8;
+		e_type >>= 8;
 	printf(" Type: ");
 	switch (x)
 	{
@@ -203,22 +203,22 @@ void typeface_type(unsigned int x, unsigned char *e_ident)
 			printf("CORE (Core file)\n");
 			break;
 		default:
-			printf("<unknown: %x>\n", x);
+			printf("<unknown: %x>\n", e_type);
 	}
 }
 /**
  * typeface_entry - write the entry
- * @y: the address
+ * @e_entry: the address
  * @e_ident: a pointer to array
  * Return: void
  */
-void typeface_entry(unsigned long int y, unsigned char *e_ident)
+void typeface_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
 	printf("Entry point address: ");
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
-		y = ((y << 8) & 0xFF00FF00) | ((y >> 8) & 0xFF00FF);
-		y = (y << 16) | (y >> 16);
+		e_entry = ((e_entry << 8) & 0xFF00FF00) | ((e_entry >> 8) & 0xFF00FF);
+		e_entry = (e_entry << 16) | (e_entry >> 16);
 	}
 	if (e_ident[EI_CLASS] == ELFCLASS32)
 		printf("%#x\n", (unsigned int)y);
@@ -277,8 +277,8 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	typeface_version(hdr->e_ident);
 	typeface_osabi(hdr->e_ident);
 	typeface_abi(hdr->e_ident);
-	typeface_type(hdr->x, hdr->e_ident);
-	typeface_entry(hdr->y, hdr->e_ident);
+	typeface_type(hdr->e_type, hdr->e_ident);
+	typeface_entry(hdr->e_entry, hdr->e_ident);
 	free(hdr);
 	end_elf(i);
 	return (0);
