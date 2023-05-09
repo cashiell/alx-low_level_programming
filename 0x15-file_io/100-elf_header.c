@@ -97,7 +97,7 @@ void typeface_data(unsigned char *e_ident)
 			printf("2's complement, little endian\n");
 			break;
 		case ELFDATA2MSB:
-			printf("2's complement, bit endian\n");
+			printf("2's complement, big endian\n");
 			break;
 		default:
 			printf("<unknown: %x>\n", e_ident[EI_CLASS]);
@@ -185,7 +185,7 @@ void typeface_type(unsigned int e_type, unsigned char *e_ident)
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		e_type >>= 8;
 	printf(" Type: ");
-	switch (x)
+	switch (e_type)
 	{
 		case ET_NONE:
 			printf("NONE (None)\n");
@@ -221,9 +221,9 @@ void typeface_entry(unsigned long int e_entry, unsigned char *e_ident)
 		e_entry = (e_entry << 16) | (e_entry >> 16);
 	}
 	if (e_ident[EI_CLASS] == ELFCLASS32)
-		printf("%#x\n", (unsigned int)y);
+		printf("%#x\n", (unsigned int)e_entry);
 	else
-		printf("%#lx\n", y);
+		printf("%#lx\n", e_entry);
 }
 /**
  * end_elf - close ELF file
